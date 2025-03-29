@@ -106,14 +106,5 @@ pip install -r requirements.txt
 
 ---
 
-## 🔥 已支持功能列表
-
-FedAvg, FedProx, FedAdg 聚合策略  
-MMD, Adversarial Loss, Consistency Loss, Distillation Loss  
-支持 ResNet50, ViT 多Backbone  
-支持 PACS, Office-Home 数据集  
-Windows / Linux 双系统兼容  
-实验日志 & 准确率曲线自动保存  
-可扩展个性化联邦学习与隐私保护模块
 
 
