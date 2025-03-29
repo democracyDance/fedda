@@ -1,0 +1,6 @@
+- Python 3.8+
+- PyTorch >= 1.11
+- torchvision
+- pandas
+- matplotlib
+- tqdm
