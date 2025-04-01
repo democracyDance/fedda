@@ -3,35 +3,30 @@
 ## 📌 项目结构
 
 ```
-fedda_research_v1/
-├── main.py                          # 主程序入口
-├── config.py                        # 超参数配置
-|
-├── fedalgorithm/
-|   |──  aggregation_factory.py      #聚合函数工厂
-│   ├── fedadg.py                
-│   ├── fedprox.py      
-│   └── federated_averaging.py          
-├── data/                            #放你想放的    
-├── model/                           # 模型模块
-│   ├── feature_extractor.py         # 特征提取器（ResNet50预训练）
-│   ├── classifier.py                # 分类器
-│   ├── domain_discriminator.py      # 域判别器
-│   └── backbone_factory.py          # 多Backbone工厂
-|
-├── loss/                            # 损失函数模块
-│   ├── mmd_loss.py                  # mmd损失（领域对齐损失）
-│   ├── adversarial_loss.py          # 特征提取器和全局特征判别器之间的对抗损失
-│   ├── consistency_loss.py          # 一致性正则化损失
-│   └── distillation_loss.py         # 蒸馏损失
-|
-├── utils/                           # 工具模块
-│   ├── cli_parser.py                # 命令行参数解析
-│   ├── data_loader.py               # 本地数据加载器
-│   └── logger.py                    # 日志工具
-├── out/                             # 训练结果自动保存
-├── requirements.txt                 # 依赖库清单
-├── README.md                        # 项目说明文档
+project/
+├── main.py                  → 联邦训练主程序
+├── fine_tune.py             → 微调程序
+├── config.py                → 超参数配置
+├── model/                   → 模型模块
+│   ├── backbone_factory.py
+│   ├── classifier.py
+│   ├── domain_discriminator.py
+│   └── feature_extractor.py
+├── loss/                    → 损失函数模块
+│   ├── adversarial_loss.py
+│   ├── consistency_loss.py
+│   ├── distillation_loss.py
+│   └── mmd_loss.py
+├── utils/                   → 工具模块
+│   ├── cli_parser.py
+│   ├── data_loader.py
+│   └── logger.py
+└── fedalgorithm/            → 聚合策略模块
+    ├── aggregation_factory.py
+    ├── fedadg.py
+    ├── federated_averaging.py
+    └── fedprox.py
+
 ```
 
 ---

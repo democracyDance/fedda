@@ -6,9 +6,11 @@ from model.classifier import Classifier
 from utils.data_loader import get_loader
 from utils.cli_parser import get_args
 import config
+from tqdm import tqdm
 import os
+#微调阶段只针对目标域分类器，冻结特征提取器，避免过拟合
 
-# ========== 验证函数 ==========
+# 评估函数
 def evaluate(model, classifier, dataloader, device):
     model.eval()
     classifier.eval()
@@ -22,53 +24,68 @@ def evaluate(model, classifier, dataloader, device):
             total_acc += acc
     return total_acc / len(dataloader)
 
-# ========== 微调主函数 ==========
-def fine_tune(dataset, target_domain, epochs, device):
-    print(f"Fine-tune阶段启动 → Target Domain: {target_domain}")
 
-    data_dir = os.path.join(os.getcwd(), "data", dataset)
-    target_loader = get_loader(data_dir, target_domain, batch_size=config.BATCH_SIZE)
+def fine_tune():
+    args = get_args()
+    dataset = args.dataset.lower()
+    target_domain = args.target
+    device = torch.device(args.device)
 
-    # 加载联邦训练后保存的全局模型
+    print("\n🎯 Fine-tune 微调阶段开始...")
+
+    # === 加载训练好的全局模型参数 ===
     extractor = FeatureExtractor().to(device)
     classifier = Classifier().to(device)
-    extractor.load_state_dict(torch.load('out/global_extractor.pth'))
-    classifier.load_state_dict(torch.load('out/global_classifier.pth'))
+    extractor.load_state_dict(torch.load("out/global_extractor.pth"))
+    classifier.load_state_dict(torch.load("out/global_classifier.pth"))
 
-    # 定义优化器 & 损失函数
-    optimizer = optim.Adam(list(extractor.parameters()) + list(classifier.parameters()), lr=1e-4)
+    # === 冻结特征提取器参数，只训练分类器 ===
+    for param in extractor.parameters():
+        param.requires_grad = False
+
+    # === 优化器仅更新分类器 ===
+    optimizer = optim.Adam(classifier.parameters(), lr=config.FINETUNE_LR)
     criterion = nn.CrossEntropyLoss()
 
-    # 微调训练
-    for epoch in range(epochs):
-        extractor.train()
-        classifier.train()
+    # === 准备目标域数据 ===
+    target_loader = get_loader(os.path.join(os.getcwd(), "data", dataset), target_domain, batch_size=config.BATCH_SIZE)
+
+    # === Fine-tune 开始 ===
+    classifier.train()
+    for epoch in range(args.epochs):
         total_loss, total_acc = 0, 0
-        for x, y in target_loader:
+        data_iterator = tqdm(target_loader, desc=f"Fine-tune Epoch {epoch + 1}")
+        for x, y in data_iterator:
             x, y = x.to(device), y.to(device)
-            feat = extractor(x)
+            with torch.no_grad():
+                feat = extractor(x)
             logits = classifier(feat)
             loss = criterion(logits, y)
+
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
+
             total_loss += loss.item()
             total_acc += (logits.argmax(1) == y).float().mean().item()
-        avg_loss = total_loss / len(target_loader)
-        avg_acc = total_acc / len(target_loader)
-        print(f"Epoch {epoch + 1}: Loss={avg_loss:.4f}, Acc={avg_acc * 100:.2f}%")
+            data_iterator.set_postfix(loss=total_loss / (len(target_loader)),
+                                      acc=total_acc / (len(target_loader)))
 
-    # 目标域最终验证
+        print(f"Epoch {epoch + 1}: Loss={total_loss / len(target_loader):.4f}, "
+              f"Acc={total_acc / len(target_loader) * 100:.2f}%")
+
+    # === 保存微调后的分类器参数 ===
+    torch.save(classifier.state_dict(), "out/fine_tuned_classifier.pth")
+    print("✅ Fine-tune 完成，分类器已保存 → out/fine_tuned_classifier.pth")
+
+    # === 🎯 微调后验证阶段 ===
+    print("\n🎯 开始目标域验证评估...")
+    extractor.eval()
+    classifier.eval()
     final_acc = evaluate(extractor, classifier, target_loader, device)
-    print(f" Fine-tune完成 → 目标域验证准确率：{final_acc * 100:.2f}%")
-
-    # 保存微调后模型
-    torch.save(extractor.state_dict(), "out/final_extractor.pth")
-    torch.save(classifier.state_dict(), "out/final_classifier.pth")
-    print("微调模型已保存：out/final_extractor.pth, out/final_classifier.pth")
-
+    print(f"✅ 目标域验证准确率：{final_acc * 100:.2f}%")
 
 if __name__ == "__main__":
-    args = get_args()
-    device = torch.device(args.device if torch.cuda.is_available() else "cpu")
-    fine_tune(dataset=args.dataset, target_domain=args.target, epochs=5, device=device)
+    fine_tune()
+
+

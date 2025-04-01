@@ -1,126 +1,244 @@
 Training Log
-Dataset: pacs, Source: art_painting, Target: photo, Epochs: 10, Clients: 3, Local Epochs: 3, Device: cuda:0
+Dataset: pacs, Source: art_painting, Target: photo, Epochs: 20, Clients: 3, Local Epochs: 3, Device: cuda:0
 
 === Round 1 ===
-[Client 0] Epoch 1 - Loss: 1.8470 - Acc: 31.05%
-[Client 0] Epoch 2 - Loss: 1.5364 - Acc: 39.65%
-[Client 0] Epoch 3 - Loss: 1.4300 - Acc: 45.02%
-[Client 1] Epoch 1 - Loss: 1.9134 - Acc: 26.95%
-[Client 1] Epoch 2 - Loss: 1.6169 - Acc: 35.25%
-[Client 1] Epoch 3 - Loss: 1.4761 - Acc: 43.70%
-[Client 2] Epoch 1 - Loss: 1.7445 - Acc: 34.57%
-[Client 2] Epoch 2 - Loss: 1.5175 - Acc: 41.41%
-[Client 2] Epoch 3 - Loss: 1.3519 - Acc: 48.39%
+[Client 0] Epoch 1 - Loss: 2.5559 - Acc: 25.84%
+[Client 0] Epoch 2 - Loss: 2.3780 - Acc: 24.71%
+[Client 0] Epoch 3 - Loss: 2.2564 - Acc: 30.12%
+[Client 1] Epoch 1 - Loss: 2.4469 - Acc: 28.10%
+[Client 1] Epoch 2 - Loss: 2.3697 - Acc: 22.09%
+[Client 1] Epoch 3 - Loss: 2.3296 - Acc: 25.00%
+[Client 2] Epoch 1 - Loss: 2.4407 - Acc: 26.45%
+[Client 2] Epoch 2 - Loss: 2.3634 - Acc: 25.90%
+[Client 2] Epoch 3 - Loss: 2.3516 - Acc: 26.48%
 Round 1 aggregation done.
 
 === Round 2 ===
-[Client 0] Epoch 1 - Loss: 1.5492 - Acc: 42.48%
-[Client 0] Epoch 2 - Loss: 1.3302 - Acc: 49.07%
-[Client 0] Epoch 3 - Loss: 1.1439 - Acc: 55.13%
-[Client 1] Epoch 1 - Loss: 1.6906 - Acc: 36.57%
-[Client 1] Epoch 2 - Loss: 1.4545 - Acc: 42.29%
-[Client 1] Epoch 3 - Loss: 1.3092 - Acc: 49.17%
-[Client 2] Epoch 1 - Loss: 1.5843 - Acc: 40.38%
-[Client 2] Epoch 2 - Loss: 1.5124 - Acc: 39.75%
-[Client 2] Epoch 3 - Loss: 1.4026 - Acc: 43.65%
+[Client 0] Epoch 1 - Loss: 2.4640 - Acc: 21.02%
+[Client 0] Epoch 2 - Loss: 2.3810 - Acc: 21.31%
+[Client 0] Epoch 3 - Loss: 2.3036 - Acc: 24.24%
+[Client 1] Epoch 1 - Loss: 2.4716 - Acc: 20.93%
+[Client 1] Epoch 2 - Loss: 2.3395 - Acc: 23.21%
+[Client 1] Epoch 3 - Loss: 2.3047 - Acc: 26.11%
+[Client 2] Epoch 1 - Loss: 2.4568 - Acc: 22.09%
+[Client 2] Epoch 2 - Loss: 2.3677 - Acc: 19.22%
+[Client 2] Epoch 3 - Loss: 2.2895 - Acc: 27.15%
 Round 2 aggregation done.
 
 === Round 3 ===
-[Client 0] Epoch 1 - Loss: 1.3539 - Acc: 50.00%
-[Client 0] Epoch 2 - Loss: 1.1498 - Acc: 54.79%
-[Client 0] Epoch 3 - Loss: 0.9884 - Acc: 58.25%
-[Client 1] Epoch 1 - Loss: 1.2804 - Acc: 51.56%
-[Client 1] Epoch 2 - Loss: 1.0675 - Acc: 57.86%
-[Client 1] Epoch 3 - Loss: 0.9934 - Acc: 60.06%
-[Client 2] Epoch 1 - Loss: 1.3390 - Acc: 49.51%
-[Client 2] Epoch 2 - Loss: 1.1699 - Acc: 54.20%
-[Client 2] Epoch 3 - Loss: 0.9350 - Acc: 61.04%
+[Client 0] Epoch 1 - Loss: 2.3810 - Acc: 22.35%
+[Client 0] Epoch 2 - Loss: 2.3971 - Acc: 18.26%
+[Client 0] Epoch 3 - Loss: 2.3455 - Acc: 20.12%
+[Client 1] Epoch 1 - Loss: 2.3916 - Acc: 18.90%
+[Client 1] Epoch 2 - Loss: 2.3638 - Acc: 20.45%
+[Client 1] Epoch 3 - Loss: 2.3166 - Acc: 23.64%
+[Client 2] Epoch 1 - Loss: 2.3692 - Acc: 22.27%
+[Client 2] Epoch 2 - Loss: 2.3250 - Acc: 24.24%
+[Client 2] Epoch 3 - Loss: 2.2821 - Acc: 27.24%
 Round 3 aggregation done.
 
 === Round 4 ===
-[Client 0] Epoch 1 - Loss: 0.9807 - Acc: 60.99%
-[Client 0] Epoch 2 - Loss: 0.8124 - Acc: 64.70%
-[Client 0] Epoch 3 - Loss: 0.6826 - Acc: 66.89%
-[Client 1] Epoch 1 - Loss: 1.0200 - Acc: 59.96%
-[Client 1] Epoch 2 - Loss: 0.8173 - Acc: 63.87%
-[Client 1] Epoch 3 - Loss: 0.7153 - Acc: 67.38%
-[Client 2] Epoch 1 - Loss: 0.9987 - Acc: 60.79%
-[Client 2] Epoch 2 - Loss: 0.7415 - Acc: 67.09%
-[Client 2] Epoch 3 - Loss: 0.6859 - Acc: 67.38%
+[Client 0] Epoch 1 - Loss: 2.3413 - Acc: 19.74%
+[Client 0] Epoch 2 - Loss: 2.2982 - Acc: 22.76%
+[Client 0] Epoch 3 - Loss: 2.2738 - Acc: 25.52%
+[Client 1] Epoch 1 - Loss: 2.3476 - Acc: 22.14%
+[Client 1] Epoch 2 - Loss: 2.2863 - Acc: 27.57%
+[Client 1] Epoch 3 - Loss: 2.2638 - Acc: 27.08%
+[Client 2] Epoch 1 - Loss: 2.3730 - Acc: 19.77%
+[Client 2] Epoch 2 - Loss: 2.3109 - Acc: 22.27%
+[Client 2] Epoch 3 - Loss: 2.3161 - Acc: 24.19%
 Round 4 aggregation done.
 
 === Round 5 ===
-[Client 0] Epoch 1 - Loss: 0.6027 - Acc: 71.29%
-[Client 0] Epoch 2 - Loss: 0.5177 - Acc: 70.75%
-[Client 0] Epoch 3 - Loss: 0.4301 - Acc: 74.56%
-[Client 1] Epoch 1 - Loss: 0.6797 - Acc: 68.12%
-[Client 1] Epoch 2 - Loss: 0.4892 - Acc: 72.51%
-[Client 1] Epoch 3 - Loss: 0.3971 - Acc: 74.32%
-[Client 2] Epoch 1 - Loss: 0.6807 - Acc: 69.78%
-[Client 2] Epoch 2 - Loss: 0.4906 - Acc: 72.27%
-[Client 2] Epoch 3 - Loss: 0.5033 - Acc: 73.14%
+[Client 0] Epoch 1 - Loss: 2.3438 - Acc: 19.45%
+[Client 0] Epoch 2 - Loss: 2.3178 - Acc: 23.05%
+[Client 0] Epoch 3 - Loss: 2.2858 - Acc: 21.60%
+[Client 1] Epoch 1 - Loss: 2.3476 - Acc: 21.03%
+[Client 1] Epoch 2 - Loss: 2.3264 - Acc: 24.66%
+[Client 1] Epoch 3 - Loss: 2.2736 - Acc: 23.30%
+[Client 2] Epoch 1 - Loss: 2.3374 - Acc: 21.25%
+[Client 2] Epoch 2 - Loss: 2.3049 - Acc: 25.61%
+[Client 2] Epoch 3 - Loss: 2.2647 - Acc: 26.80%
 Round 5 aggregation done.
 
 === Round 6 ===
-[Client 0] Epoch 1 - Loss: 0.4602 - Acc: 74.07%
-[Client 0] Epoch 2 - Loss: 0.4141 - Acc: 75.05%
-[Client 0] Epoch 3 - Loss: 0.3698 - Acc: 76.07%
-[Client 1] Epoch 1 - Loss: 0.4549 - Acc: 74.76%
-[Client 1] Epoch 2 - Loss: 0.3717 - Acc: 75.00%
-[Client 1] Epoch 3 - Loss: 0.4804 - Acc: 73.24%
-[Client 2] Epoch 1 - Loss: 0.4908 - Acc: 74.17%
-[Client 2] Epoch 2 - Loss: 0.3399 - Acc: 75.59%
-[Client 2] Epoch 3 - Loss: 0.3965 - Acc: 74.56%
+[Client 0] Epoch 1 - Loss: 2.3196 - Acc: 23.60%
+[Client 0] Epoch 2 - Loss: 2.2938 - Acc: 24.59%
+[Client 0] Epoch 3 - Loss: 2.2787 - Acc: 26.08%
+[Client 1] Epoch 1 - Loss: 2.3071 - Acc: 25.05%
+[Client 1] Epoch 2 - Loss: 2.2506 - Acc: 27.86%
+[Client 1] Epoch 3 - Loss: 2.1987 - Acc: 30.67%
+[Client 2] Epoch 1 - Loss: 2.3379 - Acc: 21.22%
+[Client 2] Epoch 2 - Loss: 2.3090 - Acc: 19.71%
+[Client 2] Epoch 3 - Loss: 2.2481 - Acc: 26.86%
 Round 6 aggregation done.
 
 === Round 7 ===
-[Client 0] Epoch 1 - Loss: 0.3466 - Acc: 77.54%
-[Client 0] Epoch 2 - Loss: 0.4576 - Acc: 73.78%
-[Client 0] Epoch 3 - Loss: 0.2490 - Acc: 78.17%
-[Client 1] Epoch 1 - Loss: 0.3559 - Acc: 76.95%
-[Client 1] Epoch 2 - Loss: 0.3348 - Acc: 76.46%
-[Client 1] Epoch 3 - Loss: 0.5142 - Acc: 72.36%
-[Client 2] Epoch 1 - Loss: 0.3470 - Acc: 79.25%
-[Client 2] Epoch 2 - Loss: 0.2462 - Acc: 78.76%
-[Client 2] Epoch 3 - Loss: 0.4504 - Acc: 74.17%
+[Client 0] Epoch 1 - Loss: 2.2968 - Acc: 26.05%
+[Client 0] Epoch 2 - Loss: 2.2760 - Acc: 25.23%
+[Client 0] Epoch 3 - Loss: 2.2388 - Acc: 28.08%
+[Client 1] Epoch 1 - Loss: 2.2443 - Acc: 28.10%
+[Client 1] Epoch 2 - Loss: 2.2313 - Acc: 26.99%
+[Client 1] Epoch 3 - Loss: 2.1891 - Acc: 29.07%
+[Client 2] Epoch 1 - Loss: 2.2371 - Acc: 29.62%
+[Client 2] Epoch 2 - Loss: 2.1656 - Acc: 33.84%
+[Client 2] Epoch 3 - Loss: 2.1273 - Acc: 33.78%
 Round 7 aggregation done.
 
 === Round 8 ===
-[Client 0] Epoch 1 - Loss: 0.3396 - Acc: 78.81%
-[Client 0] Epoch 2 - Loss: 0.2818 - Acc: 77.59%
-[Client 0] Epoch 3 - Loss: 0.2410 - Acc: 78.08%
-[Client 1] Epoch 1 - Loss: 0.3150 - Acc: 78.03%
-[Client 1] Epoch 2 - Loss: 0.3162 - Acc: 76.66%
-[Client 1] Epoch 3 - Loss: 0.2951 - Acc: 77.15%
-[Client 2] Epoch 1 - Loss: 0.3190 - Acc: 78.22%
-[Client 2] Epoch 2 - Loss: 0.2494 - Acc: 77.64%
-[Client 2] Epoch 3 - Loss: 0.2139 - Acc: 78.56%
+[Client 0] Epoch 1 - Loss: 2.2317 - Acc: 30.96%
+[Client 0] Epoch 2 - Loss: 2.1276 - Acc: 32.67%
+[Client 0] Epoch 3 - Loss: 2.1191 - Acc: 34.65%
+[Client 1] Epoch 1 - Loss: 2.2149 - Acc: 29.75%
+[Client 1] Epoch 2 - Loss: 2.1439 - Acc: 33.14%
+[Client 1] Epoch 3 - Loss: 2.1168 - Acc: 35.95%
+[Client 2] Epoch 1 - Loss: 2.1837 - Acc: 32.21%
+[Client 2] Epoch 2 - Loss: 2.1534 - Acc: 32.70%
+[Client 2] Epoch 3 - Loss: 2.0860 - Acc: 36.74%
 Round 8 aggregation done.
 
 === Round 9 ===
-[Client 0] Epoch 1 - Loss: 0.2846 - Acc: 79.30%
-[Client 0] Epoch 2 - Loss: 0.1981 - Acc: 79.69%
-[Client 0] Epoch 3 - Loss: 0.1781 - Acc: 80.27%
-[Client 1] Epoch 1 - Loss: 0.2618 - Acc: 79.54%
-[Client 1] Epoch 2 - Loss: 0.1586 - Acc: 80.47%
-[Client 1] Epoch 3 - Loss: 0.2773 - Acc: 76.71%
-[Client 2] Epoch 1 - Loss: 0.2513 - Acc: 78.76%
-[Client 2] Epoch 2 - Loss: 0.3098 - Acc: 78.32%
-[Client 2] Epoch 3 - Loss: 0.1753 - Acc: 80.08%
+[Client 0] Epoch 1 - Loss: 2.1486 - Acc: 32.15%
+[Client 0] Epoch 2 - Loss: 2.0905 - Acc: 35.12%
+[Client 0] Epoch 3 - Loss: 2.0716 - Acc: 35.41%
+[Client 1] Epoch 1 - Loss: 2.1569 - Acc: 32.75%
+[Client 1] Epoch 2 - Loss: 2.1216 - Acc: 35.61%
+[Client 1] Epoch 3 - Loss: 2.0118 - Acc: 35.51%
+[Client 2] Epoch 1 - Loss: 2.1621 - Acc: 33.26%
+[Client 2] Epoch 2 - Loss: 2.0761 - Acc: 34.39%
+[Client 2] Epoch 3 - Loss: 2.0246 - Acc: 36.02%
 Round 9 aggregation done.
 
 === Round 10 ===
-[Client 0] Epoch 1 - Loss: 0.2449 - Acc: 78.86%
-[Client 0] Epoch 2 - Loss: 0.2417 - Acc: 77.93%
-[Client 0] Epoch 3 - Loss: 0.2200 - Acc: 79.10%
-[Client 1] Epoch 1 - Loss: 0.2842 - Acc: 78.81%
-[Client 1] Epoch 2 - Loss: 0.2340 - Acc: 79.30%
-[Client 1] Epoch 3 - Loss: 0.1509 - Acc: 79.98%
-[Client 2] Epoch 1 - Loss: 0.2296 - Acc: 79.69%
-[Client 2] Epoch 2 - Loss: 0.2818 - Acc: 77.20%
-[Client 2] Epoch 3 - Loss: 0.2182 - Acc: 78.91%
+[Client 0] Epoch 1 - Loss: 2.1315 - Acc: 32.44%
+[Client 0] Epoch 2 - Loss: 2.0368 - Acc: 38.20%
+[Client 0] Epoch 3 - Loss: 2.0144 - Acc: 36.89%
+[Client 1] Epoch 1 - Loss: 2.1049 - Acc: 35.76%
+[Client 1] Epoch 2 - Loss: 2.0418 - Acc: 34.93%
+[Client 1] Epoch 3 - Loss: 2.0240 - Acc: 36.63%
+[Client 2] Epoch 1 - Loss: 2.1166 - Acc: 31.83%
+[Client 2] Epoch 2 - Loss: 1.9795 - Acc: 40.26%
+[Client 2] Epoch 3 - Loss: 1.9698 - Acc: 38.43%
 Round 10 aggregation done.
+
+=== Round 11 ===
+[Client 0] Epoch 1 - Loss: 2.0546 - Acc: 36.16%
+[Client 0] Epoch 2 - Loss: 1.9765 - Acc: 38.14%
+[Client 0] Epoch 3 - Loss: 1.9880 - Acc: 37.41%
+[Client 1] Epoch 1 - Loss: 2.0833 - Acc: 34.59%
+[Client 1] Epoch 2 - Loss: 1.9433 - Acc: 38.47%
+[Client 1] Epoch 3 - Loss: 1.9598 - Acc: 40.16%
+[Client 2] Epoch 1 - Loss: 2.0581 - Acc: 34.39%
+[Client 2] Epoch 2 - Loss: 1.9600 - Acc: 40.00%
+[Client 2] Epoch 3 - Loss: 1.9216 - Acc: 37.94%
+Round 11 aggregation done.
+
+=== Round 12 ===
+[Client 0] Epoch 1 - Loss: 2.0232 - Acc: 35.76%
+[Client 0] Epoch 2 - Loss: 1.9306 - Acc: 37.97%
+[Client 0] Epoch 3 - Loss: 1.9015 - Acc: 39.77%
+[Client 1] Epoch 1 - Loss: 2.0013 - Acc: 35.61%
+[Client 1] Epoch 2 - Loss: 1.9562 - Acc: 39.58%
+[Client 1] Epoch 3 - Loss: 1.8519 - Acc: 40.65%
+[Client 2] Epoch 1 - Loss: 2.0106 - Acc: 41.34%
+[Client 2] Epoch 2 - Loss: 1.9521 - Acc: 37.97%
+[Client 2] Epoch 3 - Loss: 1.8218 - Acc: 42.65%
+Round 12 aggregation done.
+
+=== Round 13 ===
+[Client 0] Epoch 1 - Loss: 1.9871 - Acc: 36.60%
+[Client 0] Epoch 2 - Loss: 1.9044 - Acc: 40.06%
+[Client 0] Epoch 3 - Loss: 1.7914 - Acc: 40.06%
+[Client 1] Epoch 1 - Loss: 2.0011 - Acc: 38.47%
+[Client 1] Epoch 2 - Loss: 1.8684 - Acc: 39.68%
+[Client 1] Epoch 3 - Loss: 1.8450 - Acc: 39.05%
+[Client 2] Epoch 1 - Loss: 1.9428 - Acc: 37.91%
+[Client 2] Epoch 2 - Loss: 1.8000 - Acc: 41.74%
+[Client 2] Epoch 3 - Loss: 1.7927 - Acc: 40.73%
+Round 13 aggregation done.
+
+=== Round 14 ===
+[Client 0] Epoch 1 - Loss: 1.9158 - Acc: 36.54%
+[Client 0] Epoch 2 - Loss: 1.8432 - Acc: 37.33%
+[Client 0] Epoch 3 - Loss: 1.7513 - Acc: 39.07%
+[Client 1] Epoch 1 - Loss: 1.9035 - Acc: 39.24%
+[Client 1] Epoch 2 - Loss: 1.7687 - Acc: 42.54%
+[Client 1] Epoch 3 - Loss: 1.7806 - Acc: 43.22%
+[Client 2] Epoch 1 - Loss: 1.8816 - Acc: 39.42%
+[Client 2] Epoch 2 - Loss: 1.7953 - Acc: 41.92%
+[Client 2] Epoch 3 - Loss: 1.6327 - Acc: 43.34%
+Round 14 aggregation done.
+
+=== Round 15 ===
+[Client 0] Epoch 1 - Loss: 1.8782 - Acc: 41.40%
+[Client 0] Epoch 2 - Loss: 1.6887 - Acc: 42.41%
+[Client 0] Epoch 3 - Loss: 1.7265 - Acc: 41.83%
+[Client 1] Epoch 1 - Loss: 1.8565 - Acc: 40.21%
+[Client 1] Epoch 2 - Loss: 1.6905 - Acc: 44.28%
+[Client 1] Epoch 3 - Loss: 1.7007 - Acc: 44.19%
+[Client 2] Epoch 1 - Loss: 1.8552 - Acc: 42.97%
+[Client 2] Epoch 2 - Loss: 1.6400 - Acc: 44.88%
+[Client 2] Epoch 3 - Loss: 1.6626 - Acc: 43.20%
+Round 15 aggregation done.
+
+=== Round 16 ===
+[Client 0] Epoch 1 - Loss: 1.7818 - Acc: 42.94%
+[Client 0] Epoch 2 - Loss: 1.6703 - Acc: 43.52%
+[Client 0] Epoch 3 - Loss: 1.6738 - Acc: 43.05%
+[Client 1] Epoch 1 - Loss: 1.8363 - Acc: 38.86%
+[Client 1] Epoch 2 - Loss: 1.6411 - Acc: 44.86%
+[Client 1] Epoch 3 - Loss: 1.7022 - Acc: 45.30%
+[Client 2] Epoch 1 - Loss: 1.8337 - Acc: 40.00%
+[Client 2] Epoch 2 - Loss: 1.6390 - Acc: 43.37%
+[Client 2] Epoch 3 - Loss: 1.5765 - Acc: 44.48%
+Round 16 aggregation done.
+
+=== Round 17 ===
+[Client 0] Epoch 1 - Loss: 1.8581 - Acc: 39.30%
+[Client 0] Epoch 2 - Loss: 1.6177 - Acc: 43.69%
+[Client 0] Epoch 3 - Loss: 1.6081 - Acc: 44.74%
+[Client 1] Epoch 1 - Loss: 1.7467 - Acc: 45.01%
+[Client 1] Epoch 2 - Loss: 1.5980 - Acc: 44.33%
+[Client 1] Epoch 3 - Loss: 1.5196 - Acc: 46.27%
+[Client 2] Epoch 1 - Loss: 1.8167 - Acc: 42.33%
+[Client 2] Epoch 2 - Loss: 1.5657 - Acc: 45.78%
+[Client 2] Epoch 3 - Loss: 1.4962 - Acc: 49.56%
+Round 17 aggregation done.
+
+=== Round 18 ===
+[Client 0] Epoch 1 - Loss: 1.7461 - Acc: 44.91%
+[Client 0] Epoch 2 - Loss: 1.5623 - Acc: 45.06%
+[Client 0] Epoch 3 - Loss: 1.4773 - Acc: 47.70%
+[Client 1] Epoch 1 - Loss: 1.7058 - Acc: 44.23%
+[Client 1] Epoch 2 - Loss: 1.5363 - Acc: 47.87%
+[Client 1] Epoch 3 - Loss: 1.4970 - Acc: 50.15%
+[Client 2] Epoch 1 - Loss: 1.7345 - Acc: 43.08%
+[Client 2] Epoch 2 - Loss: 1.4913 - Acc: 48.26%
+[Client 2] Epoch 3 - Loss: 1.4688 - Acc: 50.96%
+Round 18 aggregation done.
+
+=== Round 19 ===
+[Client 0] Epoch 1 - Loss: 1.6613 - Acc: 43.43%
+[Client 0] Epoch 2 - Loss: 1.5048 - Acc: 44.10%
+[Client 0] Epoch 3 - Loss: 1.4804 - Acc: 48.08%
+[Client 1] Epoch 1 - Loss: 1.6342 - Acc: 46.03%
+[Client 1] Epoch 2 - Loss: 1.4068 - Acc: 50.05%
+[Client 1] Epoch 3 - Loss: 1.4270 - Acc: 50.15%
+[Client 2] Epoch 1 - Loss: 1.6224 - Acc: 48.17%
+[Client 2] Epoch 2 - Loss: 1.4642 - Acc: 50.70%
+[Client 2] Epoch 3 - Loss: 1.6775 - Acc: 47.09%
+Round 19 aggregation done.
+
+=== Round 20 ===
+[Client 0] Epoch 1 - Loss: 1.6786 - Acc: 45.35%
+[Client 0] Epoch 2 - Loss: 1.4245 - Acc: 48.17%
+[Client 0] Epoch 3 - Loss: 1.4127 - Acc: 48.60%
+[Client 1] Epoch 1 - Loss: 1.5686 - Acc: 47.67%
+[Client 1] Epoch 2 - Loss: 1.3779 - Acc: 50.48%
+[Client 1] Epoch 3 - Loss: 1.3889 - Acc: 53.97%
+[Client 2] Epoch 1 - Loss: 1.5844 - Acc: 51.42%
+[Client 2] Epoch 2 - Loss: 1.3542 - Acc: 52.67%
+[Client 2] Epoch 3 - Loss: 1.3538 - Acc: 51.57%
+Round 20 aggregation done.
 Training finished. Results saved in out/
-开始源域验证评估...
-源域最终验证准确率：67.14%
-联邦训练结束，自动启动 Fine-tune 微调阶段...
+

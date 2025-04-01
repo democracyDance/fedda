@@ -18,7 +18,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 import subprocess
+from torchvision.datasets import ImageFolder
+from torch.utils.data import Subset
+from utils.data_loader import split_noniid
+from torchvision import transforms
+from torch.utils.data import DataLoader
 
+import numpy as np
 # 源域验证函数
 def evaluate(model, classifier, dataloader, device):
     model.eval()
@@ -33,8 +39,8 @@ def evaluate(model, classifier, dataloader, device):
             total_acc += acc
     return total_acc / len(dataloader)
 
-# 每个客户端训练时，输入的参数是客户端id、数据集、源域和目标域、本地训练批次、设备、日志打印与保存
-def client_update(client_id, global_model, dataset, source_domain, target_domain, local_epochs, device, logger):
+# 每个客户端训练时，输入的参数是客户端id、数据集、源域和目标域、本地训练批次、设备、日志打印与保存,每个客户的数据
+def client_update(client_id, global_model, dataset, source_domain, target_domain, local_epochs, device, logger, client_dataset):
     # 每个客户端都有自己的模型副本
     feature_extractor = FeatureExtractor().to(device)
     classifier = Classifier().to(device)
@@ -54,7 +60,8 @@ def client_update(client_id, global_model, dataset, source_domain, target_domain
 
     # 动态根据命令行参数选择数据集 & 源域source/目标域target
     data_dir = os.path.join(os.getcwd(), "data", dataset)
-    source_loader = get_loader(data_dir, source_domain, batch_size=config.BATCH_SIZE)
+    #source_loader = get_loader(data_dir, source_domain, batch_size=config.BATCH_SIZE)
+    source_loader = DataLoader(client_dataset, batch_size=config.BATCH_SIZE, shuffle=True, num_workers=4)
     target_loader = get_loader(data_dir, target_domain, batch_size=config.BATCH_SIZE)
 
     # 交叉熵分类损失，同时将所有模块定义为训练模式
@@ -150,13 +157,37 @@ def main():
     num_clients = args.clients
     local_epochs = args.local_epochs
     device = torch.device(args.device)
-
+    #日志与结果文件
     os.makedirs("out", exist_ok=True)
     logger = Logger("out")
     logger.log(f"Dataset: {dataset}, Source: {source_domain}, Target: {target_domain}, "
                f"Epochs: {epochs}, Clients: {num_clients}, Local Epochs: {local_epochs}, Device: {device}")
 
+    #接下来是划分iid和non-iid
+
+    # 源域数据路径 & transform
+    #它的作用是 → 自动帮你拼好你的数据集所在文件夹的绝对路径D:/fed_code/fedda_research_v1/data/pacs
+    data_dir = os.path.join(os.getcwd(), "data", dataset)
+    #在你用 ImageFolder 加载数据时，每张图片都会自动经过这个 transform → 变成训练用的张量数据
+    transform = transforms.Compose([
+        transforms.Resize((224, 224)),
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
+    ])
+
+    # 加载完整源域数据
+    full_dataset = ImageFolder(root=f"{data_dir}/{source_domain}", transform=transform)
+
+    if args.noniid:
+        indices = split_noniid(full_dataset, num_clients, ratio=args.noniid_ratio)
+    else:
+        indices = np.array_split(range(len(full_dataset)), num_clients)
+
+    # 划分到各客户端
+    client_datasets = [Subset(full_dataset, idxs) for idxs in indices]
+
     # 初始化全局模型
+    #每次运行都会 new 一个新的 FeatureExtractor() 和 Classifier() → 参数被初始化→ 不会自动加载之前训练好的参数
     global_model = {
         'extractor': FeatureExtractor().state_dict(),
         'classifier': Classifier().state_dict()
@@ -172,9 +203,11 @@ def main():
         client_models = []
         accs = []
         logger.log(f"\n=== Round {round + 1} ===")
+
+        # 把 client_datasets 传给 client_update
         for client_id in range(num_clients):
             extractor_state, classifier_state, acc = client_update(
-                client_id, global_model, dataset, source_domain, target_domain, local_epochs, device, logger)
+                client_id, global_model, dataset, source_domain, target_domain, local_epochs, device, logger, client_datasets[client_id])
             model = FeatureExtractor()
             model.load_state_dict(extractor_state)
             client_models.append(model)
@@ -200,6 +233,7 @@ def main():
     classifier = Classifier().to(device)
     extractor.load_state_dict(global_model['extractor'])
     classifier.load_state_dict(global_model['classifier'])
+    #目前只在源域进行验证
     source_acc = evaluate(extractor, classifier, source_loader, device)
     logger.log(f"源域最终验证准确率：{source_acc * 100:.2f}%")
 
@@ -211,8 +245,9 @@ def main():
     logger.log("联邦训练结束，自动启动 Fine-tune 微调阶段...")
     subprocess.call(["python", "fine_tune.py",
                      "--dataset", dataset,
+                     "--source", source_domain,#无所谓，只是为了满足utils/cli_parser.py的输入格式
                      "--target", target_domain,
-                     "--epochs", "5",
+                     "--epochs", "20",
                      "--device", args.device])
 
 

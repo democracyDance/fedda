@@ -8,6 +8,7 @@ class DomainDiscriminator(nn.Module):
         self.net = nn.Sequential(
             nn.Linear(256, 128),
             nn.ReLU(),
+            nn.Dropout(0.2),  # ✅ Dropout防止过拟合
             nn.Linear(128, 1),
             nn.Sigmoid()
         )
