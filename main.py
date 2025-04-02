@@ -40,11 +40,14 @@ def evaluate(model, classifier, dataloader, device):
     return total_acc / len(dataloader)
 
 # 每个客户端训练时，输入的参数是客户端id、数据集、源域和目标域、本地训练批次、设备、日志打印与保存,每个客户的数据
-def client_update(client_id, global_model, dataset, source_domain, target_domain, local_epochs, device, logger, client_dataset):
-    # 每个客户端都有自己的模型副本
+def client_update(client_id, global_model, dataset, source_domain, target_domain, local_epochs, device, logger, client_dataset, classifier, discriminator):
+    # 每个客户端都有自己的模型副本，在每一个大轮的时候，对分类器、特征提取器和判别器进行初始化
     feature_extractor = FeatureExtractor().to(device)
-    classifier = Classifier().to(device)
-    discriminator = DomainDiscriminator().to(device)
+    #classifier = Classifier().to(device)
+    #discriminator = DomainDiscriminator().to(device)
+    #本地持久化
+    classifier.to(device)  # 本地持久化
+    discriminator.to(device)  # 本地持久化
 
     # 确保每轮通信开始前，客户端参数与服务器一致
     feature_extractor.load_state_dict(global_model['extractor'])
@@ -132,7 +135,9 @@ def client_update(client_id, global_model, dataset, source_domain, target_domain
         avg_acc = total_acc / len(source_loader)
         logger.log(f"[Client {client_id}] Epoch {epoch + 1} - Loss: {avg_loss:.4f} - Acc: {avg_acc * 100:.2f}%")
 
-    return feature_extractor.state_dict(), classifier.state_dict(), avg_acc
+    #return feature_extractor.state_dict(), classifier.state_dict(), avg_acc
+    return feature_extractor.state_dict(), classifier.state_dict(), discriminator.state_dict(), avg_acc
+
 
 # 准确率曲线保存
 def plot_results(results, out_dir):
@@ -186,6 +191,15 @@ def main():
     # 划分到各客户端
     client_datasets = [Subset(full_dataset, idxs) for idxs in indices]
 
+    # ========== 新增：为每个客户端持久化本地分类器 & 判别器 ==========
+    client_classifiers = []
+    client_discriminators = []
+    for _ in range(num_clients):
+        classifier = Classifier().to(device)
+        discriminator = DomainDiscriminator().to(device)
+        client_classifiers.append(classifier)
+        client_discriminators.append(discriminator)
+
     # 初始化全局模型
     #每次运行都会 new 一个新的 FeatureExtractor() 和 Classifier() → 参数被初始化→ 不会自动加载之前训练好的参数
     global_model = {
@@ -206,8 +220,15 @@ def main():
 
         # 把 client_datasets 传给 client_update
         for client_id in range(num_clients):
-            extractor_state, classifier_state, acc = client_update(
-                client_id, global_model, dataset, source_domain, target_domain, local_epochs, device, logger, client_datasets[client_id])
+            #extractor_state, classifier_state, acc = client_update(
+                #client_id, global_model, dataset, source_domain, target_domain, local_epochs, device, logger, client_datasets[client_id])
+            # 持久化更新
+            extractor_state, classifier_state, discriminator_state, acc = client_update(
+                client_id, global_model, dataset, source_domain, target_domain, local_epochs, device, logger, client_datasets[client_id],
+                client_classifiers[client_id], client_discriminators[client_id]
+            )
+            client_classifiers[client_id].load_state_dict(classifier_state)
+            client_discriminators[client_id].load_state_dict(discriminator_state)
             model = FeatureExtractor()
             model.load_state_dict(extractor_state)
             client_models.append(model)
@@ -247,7 +268,7 @@ def main():
                      "--dataset", dataset,
                      "--source", source_domain,#无所谓，只是为了满足utils/cli_parser.py的输入格式
                      "--target", target_domain,
-                     "--epochs", "20",
+                     "--epochs", "50",
                      "--device", args.device])
 
 
